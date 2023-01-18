@@ -1,0 +1,25 @@
+﻿@inherits ProductSizesNavigationMenuBase<ProductSizeDto>
+@if(productSize == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if(ErrorMessage != null)
+{
+    <DisplayError ErrorMessage = "@ErrorMessage"/>
+}
+else
+{
+
+        <div class = "nav-item px-3">
+        <hr />
+        <h4>Filter By Size </h4>
+
+           
+                        ` <CheckBoxListViewer Data="@productSize"
+                          TextField="@((item)=>item.Name)"
+                          ValueField="@((item)=>item.Id)"
+                          SelectedValues="@SelectedIds" 
+                          SelectedValuesString="SelectedValuesString"/>
+
+    </div>
+}

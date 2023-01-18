@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.WebApp.Server", "PedaleaShop.WebApp\Server\PedaleaShop.WebApp.Server.csproj", "{BA2BA23C-BBFC-4BD1-9A3C-78B6E7B6A0EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaleaShop.WebApp.Server", "PedaleaShop.WebApp\Server\PedaleaShop.WebApp.Server.csproj", "{BA2BA23C-BBFC-4BD1-9A3C-78B6E7B6A0EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.WebApp.Client", "PedaleaShop.WebApp\Client\PedaleaShop.WebApp.Client.csproj", "{D3FB44FA-1925-4BE0-9432-5B18C715DB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaleaShop.WebApp.Client", "PedaleaShop.WebApp\Client\PedaleaShop.WebApp.Client.csproj", "{D3FB44FA-1925-4BE0-9432-5B18C715DB66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.WebApp.Shared", "PedaleaShop.WebApp\Shared\PedaleaShop.WebApp.Shared.csproj", "{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaleaShop.WebApp.Shared", "PedaleaShop.WebApp\Shared\PedaleaShop.WebApp.Shared.csproj", "{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.Models.Dtos", "PedaleaShop.Models\PedaleaShop.Models.Dtos.csproj", "{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,27 @@
+﻿@inherits ProductColorsNavigationMenuBase<ProductColorDto>
+
+@if(productColor == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if(ErrorMessage != null)
+{
+    <DisplayError ErrorMessage = "@ErrorMessage"/>
+}
+else
+{
+
+        <div class = "nav-item px-3">
+        <hr />
+        <h4>Filter By Color </h4>
+           </div>
+        <div class = "nav-item px-3">
+           
+                        ` <CheckBoxListViewer Data="@productColor"
+                          TextField="@((item)=>item.Name)"
+                          ValueField="@((item)=>item.Id)"
+                          SelectedValues="@SelectedIds" 
+                          SelectedValuesString="SelectedValuesString"/>
+
+    </div>
+}
