@@ -1,0 +1,3 @@
+[submodule "Dependencies/PedaleaShop.WebApi"]
+	path = Dependencies/PedaleaShop.WebApi
+	url = https://github.com/deivy311/PedaleaShop.WebApi

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PedaleaShop.Entities\PedaleaShop.Entities.Dtos.csproj" />
+    <ProjectReference Include="..\..\Dependencies\PedaleaShop.Entities\PedaleaShop.Entities.Dtos.csproj" />
     <ProjectReference Include="..\Shared\PedaleaShop.WebApp.Shared.csproj" />
   </ItemGroup>
 
