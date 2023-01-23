@@ -21,7 +21,7 @@ namespace PedaleaShop.WebApp.Client.Services
         {
             try
             {
-                var response = await httpClient.PostAsJsonAsync<ShoppingCartItemToAddDto>("api/ShoppingCart",cartItemToAddDto);
+                var response = await httpClient.PostAsJsonAsync<ShoppingCartItemToAddDto>("api/ShoppingCartsItems",cartItemToAddDto);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -51,7 +51,7 @@ namespace PedaleaShop.WebApp.Client.Services
         {
             try
             {
-                var response = await httpClient.DeleteAsync($"api/ShoppingCart/{id}");
+                var response = await httpClient.DeleteAsync($"api/ShoppingCartsItems/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -70,7 +70,7 @@ namespace PedaleaShop.WebApp.Client.Services
         {
             try
             {
-                var response = await httpClient.GetAsync($"api/ShoppingCart/{userId}/GetItems");
+                var response = await httpClient.GetAsync($"api/ShoppingCartsItems/{userId}/GetItems");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -109,9 +109,32 @@ namespace PedaleaShop.WebApp.Client.Services
                 var jsonRequest = JsonConvert.SerializeObject(cartItemQuantityUpdateDto);
                 var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
 
-                var response = await httpClient.PatchAsync($"api/ShoppingCart/{cartItemQuantityUpdateDto.CartItemId}", content);
+                var response = await httpClient.PatchAsync($"api/ShoppingCartsItems/UpdateQuantity/{cartItemQuantityUpdateDto.CartItemId}", content);
 
                 if(response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<ShoppingCartItemDto>();
+                }
+                return null;
+
+            }
+            catch (Exception)
+            {
+                //Log exception
+                throw;
+            }
+        }
+
+        public async Task<ShoppingCartItemDto> UpdateIsSeparated(ShoppingCartItemIsSeparatedUpdateDto cartItemIsSeparatedUpdateDto)
+        {
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(cartItemIsSeparatedUpdateDto);
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
+
+                var response = await httpClient.PatchAsync($"api/ShoppingCartsItems/UpdateIsSeparated/{cartItemIsSeparatedUpdateDto.CartItemId}", content);
+
+                if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadFromJsonAsync<ShoppingCartItemDto>();
                 }

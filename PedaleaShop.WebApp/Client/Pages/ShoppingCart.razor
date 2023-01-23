@@ -35,24 +35,22 @@ else
                         </span>
                         
                         <div>
-                            <button  @onclick ="(() => PlanSepareEvent(item.Id))"
+                            @if((TotalQuantity - TotalSeparatedItems)>0 && TotalPrice>=MinUmbralToSeparate)
+                            {
+                            <button  @onclick ="(() => PlanSepareEvent(item))"
                             class="btn btn-warning sm"><i class="fa fa-hourglass-start"></i>
                             Separate
                             </button>
-                            @if(SplitPlanOn)
+                            @if(item.Separated)
                             {
                                 <span>
                                  First Payment: 
                             <input @oninput = "()=>UpdateSeparatePlanFirstPayment_Input(item.Id)"
                             type="decimal" @bind="@SeparatePlansFirstBill" />
-                            @*<button data-itemId="@SeparatePlansplits" class="btn btn-info btn-sm update-Quantity"
-                                @onclick="(() => UpdateSeparatePlanQuantity(SeparatePlansplits, item.Quantity))"
-                            >Update </button> *@    
                                  </span>
                                     }
-                        @*</div>
-                        <div>*@
-                            <button  @onclick ="(() => DeleteCartItem_Click(item.Id))"
+                            }
+                              <button  @onclick ="(() => DeleteCartItem_Click(item.Id))"
                             class="btn btn-danger sm"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
@@ -62,7 +60,7 @@ else
         <div class="col-md-3">
             <h5>Cart Summary</h5>
             <div class="mt-2">
-                <div>Total - (@TotalQuantity items)&nbsp;<b>@TotalPrice</b></div>
+                <div>Total - (@TotalQuantity items)&nbsp;<b>@TotalPriceStr</b></div>
                 <a href="Checkout" class="btn btn-success">
                     <span class="oi oi-credit-card"></span>&nbsp; Proceed to Checkout 
                 </a>

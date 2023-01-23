@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PedaleaShop.Entities.Dtos
 {
-    public class ProductsSizeDto
+    public class ProductCategoryDto
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string IconCSS { get; set; }
+        public string? Name { get; set; }
+        public string? IconCSS { get; set; }
     }
 }

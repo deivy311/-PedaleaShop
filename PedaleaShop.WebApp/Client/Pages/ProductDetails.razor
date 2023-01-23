@@ -29,7 +29,9 @@ else
                 @onclick ="() => (AddToCart_Click(new ShoppingCartItemToAddDto{
                     CartId = HardCoded.CartId,
                     ProductId = Product.Id,
-                    Quantity = 1
+                    Quantity = 1,
+                    Separated=false,
+                    Paid=false
                 }))"
                 ><b>Add to Cart</b></button>
             </div>

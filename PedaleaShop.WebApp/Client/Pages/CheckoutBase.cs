@@ -27,7 +27,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
 
-        protected async Task CheckOutPAymentButtonEvent(string UserName)
+        protected async Task CheckOutPaymentButtonEvent(string UserName)
         {
 
         }

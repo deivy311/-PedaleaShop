@@ -8,7 +8,7 @@ namespace PedaleaShop.WebApp.Client.Services.Contracts
         Task<ShoppingCartItemDto> AddItem(ShoppingCartItemToAddDto cartItemToAddDto);
         Task<ShoppingCartItemDto> DeleteItem(int id);
         Task<ShoppingCartItemDto> UpdateQuantity(ShoppingCartItemQuantityUpdateDto cartItemQuantityUpdateDto);
-
+        Task<ShoppingCartItemDto> UpdateIsSeparated(ShoppingCartItemIsSeparatedUpdateDto cartItemQuantityUpdateDto);
         event Action<int> OnShoppingCartChanged;
         void RaiseEventOnShoppingCartChanged(int totalQuantity);
 

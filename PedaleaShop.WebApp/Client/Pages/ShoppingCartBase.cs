@@ -20,7 +20,10 @@ namespace PedaleaShop.WebApp.Client.Pages
 
         public string ErrorMessage { get; set; }
 
-        protected string TotalPrice { get; set; }
+        protected string TotalPriceStr { get; set; }
+        protected decimal TotalPrice { get; set; }
+        protected decimal MinUmbralToSeparate { get; set; } = 100;
+        protected int TotalSeparatedItems { get; set; }
         protected int TotalQuantity { get; set; }
         protected bool SplitPlanOn { get; set; } = false;
         protected int SeparatePlansplits { get; set; } = 3;
@@ -47,9 +50,31 @@ namespace PedaleaShop.WebApp.Client.Pages
             CartChanged();
 
         }
-        protected void PlanSepareEvent(int id)
+        protected async void PlanSepareEvent(ShoppingCartItemDto _updateItemDto)
         {
-            SplitPlanOn = !SplitPlanOn;
+            try
+            {
+                _updateItemDto.Separated = !_updateItemDto.Separated;
+
+                var updateItemDto = new ShoppingCartItemIsSeparatedUpdateDto
+                {
+                    CartItemId = _updateItemDto.Id,
+                    Separated = _updateItemDto.Separated
+                };
+
+                var returnedUpdateItemDto = await this.ShoppingCartService.UpdateIsSeparated(updateItemDto);
+
+                    await UpdateItemTotalPrice(returnedUpdateItemDto);
+
+                    CartChanged();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 
         }
@@ -57,7 +82,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         {
             
         }
-            protected async Task UpdateQuantityCartItem_Click(int id, int Quantity)
+        protected async Task UpdateQuantityCartItem_Click(int id, int Quantity)
         {
             try
             {
@@ -134,11 +159,16 @@ namespace PedaleaShop.WebApp.Client.Pages
         {
             SetTotalPrice();
             SetTotalQuantity();
+            SetTotalSeparatedItems();
         }
-
+        private void SetTotalSeparatedItems()
+        {
+            TotalSeparatedItems = this.ShoppingCartItems.Sum(p => Convert.ToInt32(p.Separated));
+        }
         private void SetTotalPrice()
         {
-            TotalPrice = this.ShoppingCartItems.Sum(p => p.TotalPrice).ToString("C");
+            TotalPrice = this.ShoppingCartItems.Sum(p => p.TotalPrice);
+            TotalPriceStr= TotalPrice.ToString("C");
         }
         private void SetTotalQuantity()
         {
