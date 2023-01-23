@@ -14,6 +14,16 @@ namespace PedaleaShop.Entities.Extensions
                 IconCSS = Convert.ToString(row["IconCSS"]),
             });
         }
+        public static IEnumerable<UserDto> ConvertToUserDto(this DataTable user)
+        {
+            return user.AsEnumerable().Select(row => new UserDto
+            {
+                Id = Convert.ToInt32(row["Id"]),
+                UserId = Convert.ToString(row["UserId"]),
+                TotalPaidProducts = Convert.ToInt32(row["TotalPaidProducts"]),
+                TotalSeparatedProducts = Convert.ToInt32(row["TotalSeparatedProducts"])
+    });
+        }
         public static IEnumerable<ProductsColorDto> ConvertToProductColorDto(this DataTable Colors)
         {
             return Colors.AsEnumerable().Select(row => new ProductsColorDto

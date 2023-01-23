@@ -147,5 +147,28 @@ namespace PedaleaShop.WebApp.Client.Services
                 throw;
             }
         }
+
+        public async Task<UserDto> UpdateUserMetrics(string UserName, UserDto userDto)
+        {
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(userDto);
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
+
+                var response = await httpClient.PatchAsync($"api/Users/UpdateQuantity/{UserName}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<UserDto>();
+                }
+                return null;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

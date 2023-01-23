@@ -20,6 +20,9 @@ namespace PedaleaShop.WebApp.Client.Pages
         protected string PaymentDescription { get; set; }
 
         protected decimal PaymentAmount { get; set; }
+        protected int  TotalPaidProducts { get; set; }
+        protected int TotalSeparatedProducts { get; set; }
+
 
         [Inject]
         public IShoppingCartService ShoppingCartService { get; set; }
@@ -29,7 +32,13 @@ namespace PedaleaShop.WebApp.Client.Pages
 
         protected async Task CheckOutPaymentButtonEvent(string UserName)
         {
+            var updateItemDto = new UserDto
+            {
+                TotalPaidProducts = TotalPaidProducts,
+                TotalSeparatedProducts = TotalSeparatedProducts
+            };
 
+            var returnedUpdateItemDto = await this.ShoppingCartService.UpdateUserMetrics(UserName,updateItemDto);
         }
         protected string DisplayButtons { get; set; } = "block";
 
@@ -45,6 +54,9 @@ namespace PedaleaShop.WebApp.Client.Pages
 
                     PaymentAmount = ShoppingCartItems.Sum(p => p.TotalPrice);
                     TotalQuantity = ShoppingCartItems.Sum(p => p.Quantity);
+                    TotalSeparatedProducts = ShoppingCartItems.Sum(p => Convert.ToInt32(p.Separated));
+                    TotalPaidProducts= TotalQuantity- TotalSeparatedProducts;
+
                     PaymentDescription = $"O_{HardCoded.UserId}_{orderGuid}";
 
                 }

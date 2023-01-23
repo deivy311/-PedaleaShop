@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
@@ -17,12 +18,14 @@ namespace PedaleaShop.WebApp.Client.Pages
         public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
 
         public List<ShoppingCartItemDto> ShoppingCartItems { get; set; }
-
+        [CascadingParameter]
+        private Task<AuthenticationState> authenticationStateTask { get; set; }
         public string ErrorMessage { get; set; }
 
         protected string TotalPriceStr { get; set; }
         protected decimal TotalPrice { get; set; }
         protected decimal MinUmbralToSeparate { get; set; } = 100;
+        protected decimal TotalDisccount { get; set; } = 0;
         protected int TotalSeparatedItems { get; set; }
         protected int TotalQuantity { get; set; }
         protected bool SplitPlanOn { get; set; } = false;
@@ -64,9 +67,8 @@ namespace PedaleaShop.WebApp.Client.Pages
 
                 var returnedUpdateItemDto = await this.ShoppingCartService.UpdateIsSeparated(updateItemDto);
 
-                    await UpdateItemTotalPrice(returnedUpdateItemDto);
 
-                    CartChanged();
+                CartChanged();
 
 
             }
@@ -78,10 +80,7 @@ namespace PedaleaShop.WebApp.Client.Pages
 
 
         }
-        protected async Task UpdateSeparatePlanQuantity(int id, int Quantity)
-        {
-            
-        }
+
         protected async Task UpdateQuantityCartItem_Click(int id, int Quantity)
         {
             try
@@ -157,17 +156,36 @@ namespace PedaleaShop.WebApp.Client.Pages
         }
         private void CalculateCartSummaryTotals()
         {
-            SetTotalPrice();
-            SetTotalQuantity();
             SetTotalSeparatedItems();
+            SetTotalPrice();
+            SetTotalDisccountAsync();
+            SetTotalQuantity();
         }
+
+        private async Task SetTotalDisccountAsync()
+        {
+            var updateItemDto = new UserDto
+            {
+                TotalPaidProducts = 0,
+                TotalSeparatedProducts = 0
+            };
+            var _user = (await authenticationStateTask).User;
+            var returnedUpdateItemDto = await this.ShoppingCartService.UpdateUserMetrics(_user.Identity.Name, updateItemDto);
+            if(returnedUpdateItemDto.TotalPaidProducts>1)
+            {
+                TotalDisccount = 20;
+                StateHasChanged();
+
+            }
+        }
+
         private void SetTotalSeparatedItems()
         {
             TotalSeparatedItems = this.ShoppingCartItems.Sum(p => Convert.ToInt32(p.Separated));
         }
         private void SetTotalPrice()
         {
-            TotalPrice = this.ShoppingCartItems.Sum(p => p.TotalPrice);
+            TotalPrice = this.ShoppingCartItems.Sum(p => p.TotalPrice)*(100- TotalDisccount)/100;
             TotalPriceStr= TotalPrice.ToString("C");
         }
         private void SetTotalQuantity()
@@ -192,6 +210,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         { 
             CalculateCartSummaryTotals();
             ShoppingCartService.RaiseEventOnShoppingCartChanged(TotalQuantity);
+
         }
 
     }
