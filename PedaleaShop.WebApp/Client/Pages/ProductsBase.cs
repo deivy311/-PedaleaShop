@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Pages
@@ -18,7 +18,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
 
-        public IEnumerable<ProductDto> Products { get; set; }
+        public IEnumerable<ProductsDto> Products { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -47,7 +47,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             }
             
         }
-        protected IOrderedEnumerable<IGrouping<int, ProductDto>> GetGroupedProducts(List<int> ColorsIdsToSearch)
+        protected IOrderedEnumerable<IGrouping<int, ProductsDto>> GetGroupedProducts(List<int> ColorsIdsToSearch)
         {
             return from product in Products
                    where ColorsIdsToSearch.Contains(product.ColorId)
@@ -55,14 +55,14 @@ namespace PedaleaShop.WebApp.Client.Pages
                    orderby prodByCatGroup.Key
                    select prodByCatGroup;
         }
-        protected IOrderedEnumerable<IGrouping<int, ProductDto>> GetGroupedProductsByCategory()
+        protected IOrderedEnumerable<IGrouping<int, ProductsDto>> GetGroupedProductsByCategory()
         {  
             return from product in Products
                    group product by product.CategoryId into prodByCatGroup
                    orderby prodByCatGroup.Key
                    select prodByCatGroup;
         }
-        protected string GetCategoryName(IGrouping<int, ProductDto> groupedProductDtos)
+        protected string GetCategoryName(IGrouping<int, ProductsDto> groupedProductDtos)
         {
             return groupedProductDtos.FirstOrDefault(pg => pg.CategoryId == groupedProductDtos.Key).CategoryName;
         }

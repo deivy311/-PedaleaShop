@@ -1,4 +1,4 @@
-﻿using PedaleaShop.Models.Dtos;
+﻿using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 using System.Net.Http.Json;
 
@@ -13,20 +13,20 @@ namespace PedaleaShop.WebApp.Client.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<ProductDto> GetItem(int id)
+        public async Task<ProductsDto> GetItem(int id)
         {
             try
             {
-                var response = await httpClient.GetAsync($"api/Product/{id}");
+                var response = await httpClient.GetAsync($"api/Products/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(ProductDto);
+                        return default(ProductsDto);
                     }
 
-                    return await response.Content.ReadFromJsonAsync<ProductDto>();
+                    return await response.Content.ReadFromJsonAsync<ProductsDto>();
                 }
                 else 
                 { 
@@ -41,20 +41,20 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-        public async Task<IEnumerable<ProductDto>> GetItems()
+        public async Task<IEnumerable<ProductsDto>> GetItems()
         {
             try
             {
-                var response = await this.httpClient.GetAsync("api/Product");
+                var response = await this.httpClient.GetAsync("api/Products");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<ProductDto>();
+                        return Enumerable.Empty<ProductsDto>();
                     }
 
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductDto>>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductsDto>>();
                 }
                 else
                 {
@@ -70,19 +70,19 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-            public async Task<IEnumerable<ProductDto>> GetItemsByCategory(int categoryId)
+            public async Task<IEnumerable<ProductsDto>> GetItemsByCategory(int categoryId)
         {
             try
             {
-                var response = await httpClient.GetAsync($"api/Product/{categoryId}/GetItemsByCategory");
+                var response = await httpClient.GetAsync($"api/Products/{categoryId}/GetItemsByCategory");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<ProductDto>();
+                        return Enumerable.Empty<ProductsDto>();
                     }
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductDto>>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductsDto>>();
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-        public Task<IEnumerable<ProductDto>> GetItemsByCategory(List<int> categoryId)
+        public Task<IEnumerable<ProductsDto>> GetItemsByCategory(List<int> categoryId)
         {
             throw new NotImplementedException();
         }
@@ -106,7 +106,7 @@ namespace PedaleaShop.WebApp.Client.Services
         {
             try
             {
-                var response = await httpClient.GetAsync("api/Product/GetProductCategories");
+                var response = await httpClient.GetAsync("api/ProductsCategories");
 
                 if(response.IsSuccessStatusCode)
                 {
@@ -128,19 +128,19 @@ namespace PedaleaShop.WebApp.Client.Services
                 throw;
             }
         }
-        public async Task<IEnumerable<ProductColorDto>> GetProductsColors()
+        public async Task<IEnumerable<ProductsColorDto>> GetProductsColors()
         {
             try
             {
-                var response = await httpClient.GetAsync("api/Product/GetProductsColors");
+                var response = await httpClient.GetAsync("api/ProductsColors");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<ProductColorDto>();
+                        return Enumerable.Empty<ProductsColorDto>();
                     }
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductColorDto>>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductsColorDto>>();
                 }
                 else
                 {
@@ -154,19 +154,19 @@ namespace PedaleaShop.WebApp.Client.Services
                 throw;
             }
         }
-        public async Task<IEnumerable<ProductSizeDto>> GetProductsSizes()
+        public async Task<IEnumerable<ProductsSizeDto>> GetProductsSizes()
         {
             try
             {
-                var response = await httpClient.GetAsync("api/Product/GetProductsSizes");
+                var response = await httpClient.GetAsync("api/ProductsSizes");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<ProductSizeDto>();
+                        return Enumerable.Empty<ProductsSizeDto>();
                     }
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductSizeDto>>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ProductsSizeDto>>();
                 }
                 else
                 {

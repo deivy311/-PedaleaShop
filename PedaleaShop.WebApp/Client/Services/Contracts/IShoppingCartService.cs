@@ -1,13 +1,13 @@
-﻿using PedaleaShop.Models.Dtos;
+﻿using PedaleaShop.Entities.Dtos;
 
 namespace PedaleaShop.WebApp.Client.Services.Contracts
 {
     public interface IShoppingCartService
     {
-        Task<List<CartItemDto>> GetItems(int userId);
-        Task<CartItemDto> AddItem(CartItemToAddDto cartItemToAddDto);
-        Task<CartItemDto> DeleteItem(int id);
-        Task<CartItemDto> UpdateQuantity(CartItemQuantityUpdateDto cartItemQuantityUpdateDto);
+        Task<List<ShoppingCartItemDto>> GetItems(int userId);
+        Task<ShoppingCartItemDto> AddItem(ShoppingCartItemToAddDto cartItemToAddDto);
+        Task<ShoppingCartItemDto> DeleteItem(int id);
+        Task<ShoppingCartItemDto> UpdateQuantity(ShoppingCartItemQuantityUpdateDto cartItemQuantityUpdateDto);
 
         event Action<int> OnShoppingCartChanged;
         void RaiseEventOnShoppingCartChanged(int totalQuantity);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Pages
@@ -22,7 +23,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public IManageProductsLocalStorageService ManageProductsLocalStorageService { get; set; }
 
-        public IEnumerable<ProductDto> Products { get; set; }
+        public IEnumerable<ProductsDto> Products { get; set; }
         public string CategoryName { get; set; }
         public string ErrorMessage { get; set; }
 
@@ -63,18 +64,18 @@ namespace PedaleaShop.WebApp.Client.Pages
                 ErrorMessage = ex.Message;
             }
         }
-        protected string GetCategoryName(IGrouping<int, ProductDto> groupedProductDtos)
+        protected string GetCategoryName(IGrouping<int, ProductsDto> groupedProductDtos)
         {
             return groupedProductDtos.FirstOrDefault(pg => pg.CategoryId == groupedProductDtos.Key).CategoryName;
         }
-        protected IOrderedEnumerable<IGrouping<int, ProductDto>> GetGroupedProductsByCategory()
+        protected IOrderedEnumerable<IGrouping<int, ProductsDto>> GetGroupedProductsByCategory()
         {
             return from product in Products
                    group product by product.CategoryId into prodByCatGroup
                    orderby prodByCatGroup.Key
                    select prodByCatGroup;
         }
-        private async Task<IEnumerable<ProductDto>> GetProductCollectionByCategoryId(int categoryId)
+        private async Task<IEnumerable<ProductsDto>> GetProductCollectionByCategoryId(int categoryId)
         {
             var productCollection = await ManageProductsLocalStorageService.GetCollection();
 
@@ -88,7 +89,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             }
 
         }
-        private async Task<IEnumerable<ProductDto>> GetProductCollection(int categoriesIds, List<int>? colorsId, List<int>? sizesId)
+        private async Task<IEnumerable<ProductsDto>> GetProductCollection(int categoriesIds, List<int>? colorsId, List<int>? sizesId)
         {
             var productCollection = await ManageProductsLocalStorageService.GetCollection();
 

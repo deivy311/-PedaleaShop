@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Pages
@@ -25,11 +25,11 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public ProductDto Product { get; set; }
+        public ProductsDto? Product { get; set; }
 
         public string ErrorMessage { get; set; }
 
-        private List<CartItemDto> ShoppingCartItems { get; set; }
+        private List<ShoppingCartItemDto> ShoppingCartItems { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -44,7 +44,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             }
         }
 
-        protected async Task AddToCart_Click(CartItemToAddDto cartItemToAddDto)
+        protected async Task AddToCart_Click(ShoppingCartItemToAddDto cartItemToAddDto)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             }
         }
 
-        private async Task<ProductDto> GetProductById(int id)
+        private async Task<ProductsDto> GetProductById(int id)
         {
             var productDtos = await ManageProductsLocalStorageService.GetCollection();
 

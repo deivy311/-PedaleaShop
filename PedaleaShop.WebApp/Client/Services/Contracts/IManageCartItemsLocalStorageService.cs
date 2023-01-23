@@ -1,11 +1,11 @@
-﻿using PedaleaShop.Models.Dtos;
+﻿using PedaleaShop.Entities.Dtos;
 
 namespace PedaleaShop.WebApp.Client.Services.Contracts
 {
     public interface IManageCartItemsLocalStorageService
     {
-        Task<List<CartItemDto>> GetCollection();
-        Task SaveCollection(List<CartItemDto> cartItemDtos);
+        Task<List<ShoppingCartItemDto>> GetCollection();
+        Task SaveCollection(List<ShoppingCartItemDto> cartItemDtos);
         Task RemoveCollection();
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 using System.Net.Http.Json;
 using System.Text;
@@ -17,20 +17,20 @@ namespace PedaleaShop.WebApp.Client.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<CartItemDto> AddItem(CartItemToAddDto cartItemToAddDto)
+        public async Task<ShoppingCartItemDto> AddItem(ShoppingCartItemToAddDto cartItemToAddDto)
         {
             try
             {
-                var response = await httpClient.PostAsJsonAsync<CartItemToAddDto>("api/ShoppingCart",cartItemToAddDto);
+                var response = await httpClient.PostAsJsonAsync<ShoppingCartItemToAddDto>("api/ShoppingCart",cartItemToAddDto);
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(CartItemDto);
+                        return default(ShoppingCartItemDto);
                     }
 
-                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+                    return await response.Content.ReadFromJsonAsync<ShoppingCartItemDto>();
 
                 }
                 else
@@ -47,7 +47,7 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-        public async Task<CartItemDto> DeleteItem(int id)
+        public async Task<ShoppingCartItemDto> DeleteItem(int id)
         {
             try
             {
@@ -55,9 +55,9 @@ namespace PedaleaShop.WebApp.Client.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+                    return await response.Content.ReadFromJsonAsync<ShoppingCartItemDto>();
                 }
-                return default(CartItemDto);
+                return default(ShoppingCartItemDto);
             }
             catch (Exception)
             {
@@ -66,7 +66,7 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-        public async Task<List<CartItemDto>> GetItems(int userId)
+        public async Task<List<ShoppingCartItemDto>> GetItems(int userId)
         {
             try
             {
@@ -76,9 +76,9 @@ namespace PedaleaShop.WebApp.Client.Services
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {   
-                        return Enumerable.Empty<CartItemDto>().ToList();
+                        return Enumerable.Empty<ShoppingCartItemDto>().ToList();
                     }
-                    return await response.Content.ReadFromJsonAsync<List<CartItemDto>>();
+                    return await response.Content.ReadFromJsonAsync<List<ShoppingCartItemDto>>();
                 }
                 else
                 {
@@ -102,7 +102,7 @@ namespace PedaleaShop.WebApp.Client.Services
             }
         }
 
-        public async Task<CartItemDto> UpdateQuantity(CartItemQuantityUpdateDto cartItemQuantityUpdateDto)
+        public async Task<ShoppingCartItemDto> UpdateQuantity(ShoppingCartItemQuantityUpdateDto cartItemQuantityUpdateDto)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace PedaleaShop.WebApp.Client.Services
 
                 if(response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+                    return await response.Content.ReadFromJsonAsync<ShoppingCartItemDto>();
                 }
                 return null;
 

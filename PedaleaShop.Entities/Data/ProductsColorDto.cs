@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PedaleaShop.Models.Dtos
+namespace PedaleaShop.Entities.Dtos
 {
-    public class ProductColorDto
+    public class ProductsColorDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

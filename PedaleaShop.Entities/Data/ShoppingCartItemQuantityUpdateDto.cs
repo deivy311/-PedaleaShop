@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PedaleaShop.Models.Dtos
+namespace PedaleaShop.Entities.Dtos
 {
-    public class CartItemQuantityUpdateDto
+    public class ShoppingCartItemQuantityUpdateDto
     {
         public int CartItemId { get; set; }
         public int Quantity { get; set; }

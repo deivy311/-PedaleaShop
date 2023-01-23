@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Pages
@@ -16,7 +16,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
 
-        public List<CartItemDto> ShoppingCartItems { get; set; }
+        public List<ShoppingCartItemDto> ShoppingCartItems { get; set; }
 
         public string ErrorMessage { get; set; }
 
@@ -63,7 +63,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             {
                 if (Quantity > 0)
                 {
-                    var updateItemDto = new CartItemQuantityUpdateDto
+                    var updateItemDto = new ShoppingCartItemQuantityUpdateDto
                     {
                         CartItemId = id,
                         Quantity = Quantity
@@ -118,7 +118,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             await Js.InvokeVoidAsync("MakeUpdateQuantityButtonVisible", id, visible);
         }
 
-        private async Task UpdateItemTotalPrice(CartItemDto cartItemDto)
+        private async Task UpdateItemTotalPrice(ShoppingCartItemDto cartItemDto)
         {
             var item = GetCartItem(cartItemDto.Id);
 
@@ -145,7 +145,7 @@ namespace PedaleaShop.WebApp.Client.Pages
             TotalQuantity = this.ShoppingCartItems.Sum(p => p.Quantity);
         }
 
-        private CartItemDto GetCartItem(int id)
+        private ShoppingCartItemDto GetCartItem(int id)
         {
             return ShoppingCartItems.FirstOrDefault(i => i.Id == id);
         }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 
 namespace PedaleaShop.WebApp.Client.Pages
 {
     public class DisplayProductsBase:ComponentBase
     {
         [Parameter]
-        public IEnumerable<ProductDto> Products { get; set; }
+        public IEnumerable<ProductsDto> Products { get; set; }
     
     }
 }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaleaShop.WebApp.Client",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaleaShop.WebApp.Shared", "PedaleaShop.WebApp\Shared\PedaleaShop.WebApp.Shared.csproj", "{5EF5ECE8-EB1F-43E9-9E01-43964CC4002A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.Models.Dtos", "PedaleaShop.Models\PedaleaShop.Models.Dtos.csproj", "{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaleaShop.Entities.Dtos", "PedaleaShop.Entities\PedaleaShop.Entities.Dtos.csproj", "{954FC3D1-D4C1-4E47-A4B2-291CD23BC0B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

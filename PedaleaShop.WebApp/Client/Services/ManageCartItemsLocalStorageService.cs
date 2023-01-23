@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Services
@@ -18,9 +18,9 @@ namespace PedaleaShop.WebApp.Client.Services
             this.shoppingCartService = shoppingCartService;
         }
 
-        public async Task<List<CartItemDto>> GetCollection()
+        public async Task<List<ShoppingCartItemDto>> GetCollection()
         {
-            return await this.localStorageService.GetItemAsync<List<CartItemDto>>(key)
+            return await this.localStorageService.GetItemAsync<List<ShoppingCartItemDto>>(key)
                     ?? await AddCollection();
         }
 
@@ -29,12 +29,12 @@ namespace PedaleaShop.WebApp.Client.Services
            await this.localStorageService.RemoveItemAsync(key);
         }
 
-        public async Task SaveCollection(List<CartItemDto> cartItemDtos)
+        public async Task SaveCollection(List<ShoppingCartItemDto> cartItemDtos)
         {
             await this.localStorageService.SetItemAsync(key,cartItemDtos);
         }
 
-        private async Task<List<CartItemDto>> AddCollection()
+        private async Task<List<ShoppingCartItemDto>> AddCollection()
         {
             var shoppingCartCollection = await this.shoppingCartService.GetItems(HardCoded.UserId);
 

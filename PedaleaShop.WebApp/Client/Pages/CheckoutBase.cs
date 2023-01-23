@@ -2,7 +2,8 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Pages
@@ -12,7 +13,7 @@ namespace PedaleaShop.WebApp.Client.Pages
         [Inject]
         public IJSRuntime Js { get; set; }
 
-        protected IEnumerable<CartItemDto> ShoppingCartItems { get; set; }
+        protected IEnumerable<ShoppingCartItemDto> ShoppingCartItems { get; set; }
 
         protected int TotalQuantity { get; set; }
 

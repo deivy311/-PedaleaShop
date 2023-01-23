@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PedaleaShop.Models.Dtos;
+using PedaleaShop.Entities.Dtos;
 using PedaleaShop.WebApp.Client.Services.Contracts;
 
 namespace PedaleaShop.WebApp.Client.Shared

@@ -1,10 +1,10 @@
-﻿using PedaleaShop.Models.Dtos;
+﻿using PedaleaShop.Entities.Dtos;
 
 namespace PedaleaShop.WebApp.Client.Services.Contracts
 {
     public interface IManageProductsLocalStorageService
     {
-        Task<IEnumerable<ProductDto>> GetCollection();
+        Task<IEnumerable<ProductsDto>> GetCollection();
         Task RemoveCollection();
     }
 }

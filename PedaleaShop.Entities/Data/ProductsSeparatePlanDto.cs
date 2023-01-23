@@ -1,6 +1,6 @@
-﻿namespace PedaleaShop.Models.Dtos
+﻿namespace PedaleaShop.Entities.Dtos
 {
-    public class ProductSeparatePlanDto
+    public class ProductSeparatePlan
     {
         public int NumberOfPayments { get; set; } = 2;
         public bool AlreadyPaid { get; set; } = false;
